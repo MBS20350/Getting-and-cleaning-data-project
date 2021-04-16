@@ -44,7 +44,5 @@ task5 <- task1_to_4 %>%
   group_by(subject_ID, activity) %>%
   summarise(across("tBodyAcc-mean()-X":"fBodyBodyGyroJerkMag-std()", mean))
 
-write.csv(task5, file = "getting_and_cleaning_data_project_task5.csv")
+write.table(task5, file = "getting_and_cleaning_data_project_task5.txt", row.name = FALSE)
   
-
-
