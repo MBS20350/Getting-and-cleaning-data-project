@@ -1,0 +1,141 @@
+---
+title: "Codebook.RMD"
+author: "Mark Sucato"
+date: "4/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This project uses a modified version of the Human Activity Recognition Using Smartphones Dataset, Version
+1.0.
+
+The source HAR dataset was developed by:
+
+Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
+Smartlab - Non Linear Complex Systems Laboratory
+DITEN - Università degli Studi di Genova.
+Via Opera Pia 11A, I-16145, Genoa, Italy.
+activityrecognition@smartlab.ws
+www.smartlab.ws
+
+The dataset was developed from experiments carried out with a group of 30 volunteers within an age bracket
+of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS,
+SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded
+accelerometer and gyroscope, the authors captured 3-axial linear acceleration and 3-axial angular velocity
+at a constant rate of 50Hz. The sensor signals (accelerometer and gyroscope) were pre-processed by applying
+noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128
+readings/window). The sensor acceleration signal, which has gravitational and body motion components, was
+separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is
+assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used.
+From each window, a vector of features was obtained by calculating variables from the time and frequency
+domain. The Feature variables noted below are normalized and bounded within [-1,1].  Feature variables
+labeled, in part, with 'ACC' are in standard gravity units 'g.'  Feature variables labeled, in part, with
+'gyro' are in radians/second.
+
+## Files used by the run_analysis.R script
+
+The original HAR dataset divided the data into 'train' and 'test' sets,  This project combines the two sets
+into one unified tidy dataset.  Pertinent files within the original dataset used by this project include:
+
+- 'features.txt': List of all 561 features; used within the project as column labels for the feature
+   variables.  
+- 'activity_labels.txt': Links the six class labels with their activity name; used to build the activity
+   observations.
+- 'train/X_train.txt': Training set feature variable data.  561 different variables.
+- 'train/y_train.txt': Training set activity labels; its range is from 1 to 6.
+- 'train/subject_train.txt': Subject for each training observation; its range is from 1 to 30.
+- 'test/X_test.txt': Test set feature variable data.  561 different variables.
+- 'test/y_test.txt': Test set activity labels; its range is from 1 to 6.
+- 'test/subject_test.txt': Subject for each test observation; its range is from 1 to 30.
+
+## Provided HAR Files not used by the run_analysis.R script
+
+- 'features_info.txt': Provides background information about the feature variables. 
+- 'train (or test)/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone
+   accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same
+   description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z
+   axis. 
+- 'train (or test)/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by
+   subtracting the gravity from the total acceleration. 
+- 'train (or test)/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the
+   gyroscope for each window sample. The units are radians/second.
+
+## Project results and product
+
+Task Five of the project creates a new summary dataset from the original combined train and test datasets,
+named "getting_and_cleaning_data_project_task5.txt".  Its variables are:
+
+- 'subject_ID': Subject for each observation; its range is from 1 to 30. 
+- 'activity': Factor variable containing the six different activities noted above.
+- Means of 66 different features variables involving means or std devs:  Means of each feature variable
+  grouped by subject and activity.  Because the objective of the project is to wrangle data for undefined
+  future analysis, an intentionally inclusive heuristic was used to identify feature means and standard
+  deviations in order to provide maximum future flexibility.
+
+## Additional information
+
+Activity labels:
+
+- 1 WALKING
+- 2 WALKING_UPSTAIRS
+- 3 WALKING_DOWNSTAIRS
+- 4 SITTING
+- 5 STANDING
+- 6 LAYING
+
+Feature variables:
+
+- tBodyAcc-XYZ
+- tGravityAcc-XYZ
+- tBodyAccJerk-XYZ
+- tBodyGyro-XYZ
+- tBodyGyroJerk-XYZ
+- tBodyAccMag
+- tGravityAccMag
+- tBodyAccJerkMag
+- tBodyGyroMag
+- tBodyGyroJerkMag
+- fBodyAcc-XYZ
+- fBodyAccJerk-XYZ
+- fBodyGyro-XYZ
+- fBodyAccMag
+- fBodyAccJerkMag
+- fBodyGyroMag
+- fBodyGyroJerkMag
+
+The set of variables that were estimated from these signals are: 
+
+- mean(): Mean value
+- std(): Standard deviation
+- mad(): Median absolute deviation 
+- max(): Largest value in array
+- min(): Smallest value in array
+- sma(): Signal magnitude area
+- energy(): Energy measure. Sum of the squares divided by the number of values. 
+- iqr(): Interquartile range 
+- entropy(): Signal entropy
+- arCoeff(): Autorregresion coefficients with Burg order equal to 4
+- correlation(): correlation coefficient between two signals
+- maxInds(): index of the frequency component with largest magnitude
+- meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+- skewness(): skewness of the frequency domain signal 
+- kurtosis(): kurtosis of the frequency domain signal 
+- bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+- angle(): Angle between to vectors.
+
+Additional vectors obtained by averaging the signals in a signal window sample. These are used on the
+angle() variable:
+
+- gravityMean
+- tBodyAccMean
+- tBodyAccJerkMean
+- tBodyGyroMean
+- tBodyGyroJerkMean
+
+The complete list of variables of each feature vector is available in 'features.txt'; more information can
+be found in 'features_info.txt'
